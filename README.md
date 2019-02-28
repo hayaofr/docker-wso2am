@@ -1,2 +1,3 @@
 # docker-wso2am
 Using wso2am 2.1.0
+Exposes ports 9443 9763 8243 8280 10397 7711 9711 9611 5672 8672
