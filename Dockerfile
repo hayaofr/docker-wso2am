@@ -25,7 +25,12 @@ RUN apk add --no-cache --update-cache \
     apk del \
 	  ca-certificates \
 	  unzip \
-      wget 
+      wget
+
+RUN sed -i -e 's/<!--HostName>www.wso2.org<\/HostName-->/<HostName>localhost<\/HostName>/g' /opt/wso2am-2.1.0/repository/conf/carbon.xml &&\
+sed -i -e 's/\${carbon.local.ip}/localhost/g' /opt/wso2am-2.1.0/repository/conf/api-manager.xml
+
+ENV JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=12345 -Djava.util.prefs.systemRoot=/home/${PRODUCT_USER}/.java -Djava.util.prefs.userRoot=/home/${PRODUCT_USER}/.java/.userPrefs
 
 USER ${PRODUCT_USER}
 
