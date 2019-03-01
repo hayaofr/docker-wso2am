@@ -30,10 +30,8 @@ RUN apk add --no-cache --update-cache \
 RUN sed -i -e 's/<!--HostName>www.wso2.org<\/HostName-->/<HostName>localhost<\/HostName>/g' /opt/wso2am-2.1.0/repository/conf/carbon.xml &&\
 sed -i -e 's/\${carbon.local.ip}/localhost/g' /opt/wso2am-2.1.0/repository/conf/api-manager.xml
 
-ENV JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=12345 -Djava.util.prefs.systemRoot=/home/${PRODUCT_USER}/.java -Djava.util.prefs.userRoot=/home/${PRODUCT_USER}/.java/.userPrefs
+ENV JAVA_OPTS "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=12345"
 
-USER ${PRODUCT_USER}
-
-EXPOSE 9443 9763 8243 8280 10397 7711 9711 9611 5672 8672 
+EXPOSE 9443 9763 8243 8280 10397 7711 9711 9611 5672 8672 12345
 WORKDIR /opt/${WSO2_SERVER}-${WSO2_SERVER_VERSION}
 ENTRYPOINT ["bin/wso2server.sh"]
